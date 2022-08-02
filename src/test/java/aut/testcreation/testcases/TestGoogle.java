@@ -17,8 +17,29 @@ public class TestGoogle extends SeleniumTestBase {
 
     public void testgoogle() throws InterruptedException{
         driver = DriverFactory.getDriver();
-        driver.get(BASE_URL_AUT);
-        Assertions.assertTrue(true);
+        driver.navigate().to("https://www.google.com");
+        driver.manage().deleteAllCookies();
+        driver.manage().window().maximize();
+
+        //respuesta
+        String url = driver.getCurrentUrl();
+        String title = driver.getTitle();
+        String pageSource = driver.getPageSource();
+        String handle= driver.getWindowHandle();
+
+        //find
+        //driver.findElement(By.className("gLFyf")).sendKeys("zapatos");
+        driver.findElement(By.tagName("input")).sendKeys("poleras");
+        //driver.findElement(By.className("RNNXgb")).findElement(By.tagName("input")).sendKeys("poleras");
+        driver.findElement(By.name("btnK")).click();
+
+        //navegar
+        driver.navigate().refresh();
+        Thread.sleep(5000);
+        driver.navigate().to("https://translate.google.cl");
+        Thread.sleep(5000);
+        //driver.close();//cerrar todas las pestañas del navegador
+        driver.quit();//cerrar de forma segura
     }
 
 }

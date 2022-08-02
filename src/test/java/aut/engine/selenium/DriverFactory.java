@@ -21,14 +21,18 @@ public class DriverFactory {
     public WebDriver inicializarDriver(String browser){
         System.out.println("browser value is: "+browser);
 
-        if(browser.equals("edge")){
-            WebDriverManager.edgedriver().setup();
-            hiloLocal.set(new EdgeDriver());
-        }else if(browser.equals("firefox")){
-            WebDriverManager.firefoxdriver().setup();
-            hiloLocal.set(new FirefoxDriver());
-        }else {
-            System.out.println("Please pass the correct browser value: "+browser);
+        switch (browser) {
+            case "edge":
+                WebDriverManager.edgedriver().setup();
+                hiloLocal.set(new EdgeDriver());
+                break;
+            case "firefox":
+                WebDriverManager.firefoxdriver().setup();
+                hiloLocal.set(new FirefoxDriver());
+                break;
+            default:
+                System.out.println("Please pass the correct browser value: " + browser);
+                break;
         }
         getDriver().manage().deleteAllCookies();
         getDriver().manage().window().maximize();
